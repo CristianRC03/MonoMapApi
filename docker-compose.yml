@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+    monomap-api:
+        image: crisromero/711-monomap-api:latest
+        container_name: monomap-api
+        environment:
+            PORT: ${PORT}
+            MONGO_URI: ${MONGO_URL}
+            MONGO_DB: ${MONGO_DB}
+            MAILER_USER_TOKEN: ${MAILER_USER_TOKEN}
+            MAILER_SERVICE: ${MAILER_SERVICE}
+            MAILER_EMAIL: ${MAILER_EMAIL}
+            MAPBOC_ACCESS_TOKEN: ${MAPBOC_ACCESS_TOKEN}
+        ports:
+            - "3000:3000"
+        depends_on:
+            - mongo
+
+    mongo:
+        image: mongo
+        container_name: mongo
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: 12345
+        ports:
+            - "27017:27017"
+        volumes:
+            - mongo_db:/data/db
+
+volumes:
+    mongo_db:
