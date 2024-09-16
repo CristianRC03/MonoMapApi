@@ -34,12 +34,9 @@ export class CaseController {
             const today = new Date();
             const sevenDaysBefore = new Date();
             sevenDaysBefore.setDate(today.getDate() - 7);
-            const cases = await caseModel.find({ creationDate: today }).
-                then(cases => {
-                    return caseModel.
-                        find({ creationDate: { $gte: this.formatDate(sevenDaysBefore), $lte: this.formatDate(today) } }).
-                        sort({ creationDate: 1 });
-                });
+            const cases = await caseModel.
+                                    find({ creationDate: { $gte: this.formatDate(sevenDaysBefore), $lte: this.formatDate(today) } }).
+                                    sort({ creationDate: 1 });
             return res.json(cases);
         } catch (error) {
             return res.status(500).json({ message: 'Internal server error' });
