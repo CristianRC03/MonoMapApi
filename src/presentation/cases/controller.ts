@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { caseModel } from "../../data/models/case-model";
+import { CaseModel } from "../../data/models/case-model";
 
 
 export class CaseController {
@@ -7,7 +7,7 @@ export class CaseController {
     public createCase = async (req: Request, res: Response) => {
         try {
             const { lat, lng, genre, age } = req.body;
-            const newCase = await caseModel.create({
+            const newCase = await CaseModel.create({
                 lat,
                 lng,
                 genre,
@@ -22,7 +22,7 @@ export class CaseController {
 
     public getCases = async (req: Request, res: Response) => {
         try {
-            const cases = await caseModel.find();
+            const cases = await CaseModel.find();
             return res.json(cases);
         } catch (error) {
             return res.status(500).json({ message: 'Internal server error' });
@@ -35,7 +35,7 @@ export class CaseController {
             const sevenDaysBefore = new Date();
             sevenDaysBefore.setDate(today.getDate() - 7);
             sevenDaysBefore.setTime(0);
-            const cases = await caseModel.
+            const cases = await CaseModel.
                                     find({ creationDate: { $gte: sevenDaysBefore, $lte: today } }).
                                     sort({ creationDate: 1 });
             return res.json(cases);
@@ -48,7 +48,7 @@ export class CaseController {
         try {
             const { id } = req.params;
             const { lat, lng, genre, age } = req.body;
-            const updatedCase = await caseModel.findByIdAndUpdate(id, {
+            const updatedCase = await CaseModel.findByIdAndUpdate(id, {
                 lat,
                 lng,
                 genre,
@@ -64,7 +64,7 @@ export class CaseController {
     public deleteCase = async (req: Request, res: Response) => {
         try {
             const { id } = req.params;
-            const deletedCase = await caseModel.findByIdAndDelete(id);
+            const deletedCase = await CaseModel.findByIdAndDelete(id);
 
             return res.json(deletedCase);
         } catch (error) {

@@ -2,6 +2,7 @@ import express from 'express';
 import { MongoDataBase } from './data/init';
 import { envs } from './config/envs';
 import { AppRoutes } from './presentation/routes';
+import { emailJob } from './domain/jobs/email.job';
 
 const app = express();
 
@@ -15,4 +16,5 @@ app.use(AppRoutes.routes);
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
+  emailJob();
 });

@@ -28,4 +28,4 @@ const caseSchema = new mongoose.Schema({
     },
 }, schemaOptions)
 
-export const caseModel = mongoose.model('Case', caseSchema);
+export const CaseModel = mongoose.model('Case', caseSchema);
