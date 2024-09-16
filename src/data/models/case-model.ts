@@ -26,11 +26,6 @@ const caseSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    creationDate: {
-        type: Date,
-        default: Date.now
-    },
-    schemaOptions
-})
+}, schemaOptions)
 
 export const caseModel = mongoose.model('Case', caseSchema);

@@ -1,8 +1,12 @@
 import express from 'express';
 import { MongoDataBase } from './data/init';
 import { envs } from './config/envs';
+import { AppRoutes } from './presentation/routes';
 
 const app = express();
+
+app.use(express.json());
+app.use(AppRoutes.routes);
 
 (async () => await MongoDataBase.connect({
     mongoUrl: envs.MONGO_URL,

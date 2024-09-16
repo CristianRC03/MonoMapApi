@@ -13,10 +13,10 @@ export class MongoDataBase {
                 dbName: options.dbName,
             })
 
-            console.log('Database connected');
+            console.log('Connected to the database');
         }
         catch (error) {
-            console.error('Database connection error', error);
+            console.error('Error connecting to the database', error);
         }
     }
 }
